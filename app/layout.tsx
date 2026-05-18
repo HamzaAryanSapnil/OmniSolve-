@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import ThemeProvider from "@/context/Theme";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+import Navbar from "@/components/navigation/navbar";
 
-const inter = localFont({
-  src: "./fonts/InterVF.ttf" ,
-  variable: "--font-inter",
-  weight: "100 200 300 400 500 600 700 800 900",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const spaceGrotesk = localFont({
   src: "./fonts/SpaceGroteskVF.ttf",
   variable: "--font-space-grotesk",
   weight: "100 200 300 400 500 600 700",
-})
-
+});
 
 export const metadata: Metadata = {
   title: "Omnisolve",
@@ -32,9 +31,26 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={cn(
+        "h-full",
+        "antialiased",
+        spaceGrotesk.variable,
+        "font-sans",
+        inter.variable,
+      )}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
