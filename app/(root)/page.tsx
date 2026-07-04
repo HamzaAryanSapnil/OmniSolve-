@@ -1,4 +1,5 @@
 import { auth, signOut } from "@/auth";
+import TanstackForm from "@/components/Forms/TanstackForm";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/route";
 
@@ -11,6 +12,7 @@ export default async function Home() {
       <h1 className="h1-bold font-space-grotesk">
         Hello Space Grotesk Font Dev Overflow
       </h1>
+      <TanstackForm />
       <form
         className="px-10 pt-25"
         action={async () => {

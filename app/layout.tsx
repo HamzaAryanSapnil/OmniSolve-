@@ -40,7 +40,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       suppressHydrationWarning
     >
       <SessionProvider session={session}>
-        <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <body className="min-h-full flex flex-col">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
