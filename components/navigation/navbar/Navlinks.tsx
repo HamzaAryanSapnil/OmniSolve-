@@ -6,12 +6,9 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
 
-export default function NavLinks({
-  isMobileNav = false,
-}: {
-  isMobileNav?: boolean;
-}) {
+const NavLinks = ({ isMobileNav = false }: { isMobileNav?: boolean }) => {
   const pathname = usePathname();
   const userId = 1;
 
@@ -33,9 +30,9 @@ export default function NavLinks({
             key={item.label}
             className={cn(
               isActive
-                ? " primary-gradient rounded-lg text-light-900 "
-                : " text-dark300_light900 ",
-              "flex justify-start items-center gap-4 bg-transparent p-4",
+                ? "primary-gradient rounded-lg text-light-900"
+                : "text-dark300_light900",
+              "flex items-center justify-start gap-4 bg-transparent p-4",
             )}
           >
             <Image
@@ -57,11 +54,15 @@ export default function NavLinks({
         );
 
         return isMobileNav ? (
-          <SheetClose key={item.label}>{LinkComponent}</SheetClose>
+          <SheetClose key={item.route}>
+            {LinkComponent}
+          </SheetClose>
         ) : (
-          <div key={item.label}> LinkComponent </div>
+          <React.Fragment key={item.route}>{LinkComponent}</React.Fragment>
         );
       })}
     </>
   );
-}
+};
+
+export default NavLinks;
