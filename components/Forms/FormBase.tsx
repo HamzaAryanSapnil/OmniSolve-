@@ -16,6 +16,8 @@ export type FormControlProps = {
   className?: string;
   labelClassName?: string;
   descriptionClassName?: string;
+  labelChildren?: ReactNode;
+  descriptionChildren?: ReactNode;
 };
 
 type FormBaseProps = FormControlProps & {
@@ -32,6 +34,8 @@ export function FormBase({
   horizontal,
   labelClassName,
   descriptionClassName,
+  labelChildren,
+  descriptionChildren,
   ...props
 }: FormBaseProps) {
   const field = useFieldContext();
@@ -40,9 +44,10 @@ export function FormBase({
     <>
       <FieldLabel htmlFor={field.name} className={labelClassName}>
         {label}
+        {labelChildren}
       </FieldLabel>
       {description && (
-        <FieldDescription className={descriptionClassName}>{description}</FieldDescription>
+        <FieldDescription className={descriptionClassName}>{description} {descriptionChildren}</FieldDescription>
       )}
     </>
   );
